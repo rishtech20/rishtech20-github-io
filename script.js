@@ -8,13 +8,20 @@ var note2Self = document.getElementsByTagName("p")[0]; //Variable holding the co
 var listDescp = document.getElementsByTagName("p")[1]; //Variable holding the content of Note to self
 var h1 = document.getElementsByTagName("h1")[0];
 var li = document.getElementsByTagName("li");
+var img = document.getElementsByTagName("img");
 // var i_ok = document.getElementsByClassName("glyphicon glyphicon-ok"); //array to hold all the ok icons
 // i_trash = document.getElementsByClassName("glyphicon glyphicon-trash"); //array to hold all the trash icons
 
 //function to update the number of the items in the list
+var flag = 0;
 function countList(){
 	var badge = document.getElementsByClassName("badge")[0];
 	badge.innerText = li.length;
+	if (li.length > 0 && flag === 0){
+		ul.setAttribute('style', 'height: 370px; overflow: hidden; overflow-y: scroll;');
+		img[0].remove();
+		flag = 1;
+	}
 }
 countList();
 
@@ -188,5 +195,11 @@ function doneTask(){
 function deleteTask(){
 	this.parentElement.parentElement.remove();
 	countList();
+	if (li.length === 0){
+		var img = document.createElement('img');
+		img.src = 'assets/baby.png';
+		ul.setAttribute('style', '');
+		ul.appendChild(img);
+	}
 }
 
