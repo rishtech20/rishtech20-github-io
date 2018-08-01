@@ -8,8 +8,8 @@ var note2Self = document.getElementsByTagName("p")[0]; //Variable holding the co
 var listDescp = document.getElementsByTagName("p")[1]; //Variable holding the content of Note to self
 var h1 = document.getElementsByTagName("h1")[0];
 var li = document.getElementsByTagName("li");
-var i_ok = document.getElementsByClassName("glyphicon glyphicon-ok"); //array to hold all the ok icons
-i_trash = document.getElementsByClassName("glyphicon glyphicon-trash"); //array to hold all the trash icons
+// var i_ok = document.getElementsByClassName("glyphicon glyphicon-ok"); //array to hold all the ok icons
+// i_trash = document.getElementsByClassName("glyphicon glyphicon-trash"); //array to hold all the trash icons
 
 //function to update the number of the items in the list
 function countList(){
@@ -22,7 +22,7 @@ countList();
 //<i class="glyphicon glyphicon-trash" style="margin-left: 10px;"></i> </span>
 //Adding new item to the list
 function createListElement(){
-	var li = document.createElement("li");
+	var li = document.createElement("li");	
 	var att = document.createAttribute("class");       // Create a "class" attribute
 	att.value = "list-group-item list-group-item-action";
 	li.setAttributeNode(att);
@@ -31,17 +31,17 @@ function createListElement(){
 	span.setAttribute('style', 'float: right;'); 
 	var  i1 = document.createElement("i");
 	i1.setAttribute('class', 'glyphicon glyphicon-ok');
+	i1.addEventListener("click", doneTask);
 	span.appendChild(i1);
 	var i2 = document.createElement("i");
 	i2.setAttribute('class', 'glyphicon glyphicon-trash');
 	i2.setAttribute('style', 'margin-left: 10px');
+	i2.addEventListener("click", deleteTask);
 	span.appendChild(i2);
 	li.appendChild(span);
 	ul.appendChild(li);
 	countList();
 	additem.value = "";
-	i_ok[i_ok.length - 1].addEventListener("click", bindClick(i));
-	i_trash[i_ok.length - 1].addEventListener("click", bindClickTrash(i));
 }
 
 button.addEventListener("click", function(){
@@ -138,47 +138,56 @@ function saveAndCloseTextArea2(event){
 
 i_descList.addEventListener("click", openTextArea2)
 
-//Marking the list item as complete
-/*
-*  Description: When, the user clicks on the ok button the list item should turn red and the text should inherit
-* line-thorugh text decoration. Also, the percentage should change accordingly.
-*/
-//style="text-decoration: line-through; background-color: rgba(255, 0, 0, 0.5);
-//Using closure
+//Following code has been deprecated
+// //Marking the list item as complete
+// /*
+// *  Description: When, the user clicks on the ok button the list item should turn red and the text should inherit
+// * line-thorugh text decoration. Also, the percentage should change accordingly.
+// */
+// //style="text-decoration: line-through; background-color: rgba(255, 0, 0, 0.5);
+// //Using closure
 
- for(var i=0; i< i_ok.length; i++) {
-      i_ok[i].addEventListener("click", bindClick(i));
- }
+//  for(var i=0; i< i_ok.length; i++) {
+//       i_ok[i].addEventListener("click", bindClick(i));
+//  }
 
- function bindClick(i) {
-    return function() {
-        li[i].setAttribute("style", "text-decoration: line-through; background-color: rgba(210, 0, 100, 0.4);");
-    };
- }
+//  function bindClick(i) {
+//     return function() {
+//         li[i].setAttribute("style", "text-decoration: line-through; background-color: rgba(210, 0, 100, 0.4);");
+//     };
+//  }
 
-//Deleting the list item when trash icon is clicked.
-/*
-*  Description: When, the user clicks on the trash button the list item should be deleted from the list.
-*  Also, the percentage should change accordingly.
-*/
-//Using closure
- for(var i=0; i< li.length; i++) {
-      i_trash[i].addEventListener("click", bindClickTrash(i));
- }
+// //Deleting the list item when trash icon is clicked.
+// /*
+// *  Description: When, the user clicks on the trash button the list item should be deleted from the list.
+// *  Also, the percentage should change accordingly.
+// */
+// //Using closure
+//  for(var i = 0; i < li.length; i++) {
+//       i_trash[i].addEventListener("click", bindClickTrash(i));
+//  }
 
- function bindClickTrash(i) {
-    return function() {
-    	if (li.length === 1){
-    		li[0].remove();
-    		countList();
-    		return 0;
-    	}
-    	console.log(i);
-        li[i].remove();
-        countList();
-    };
- }
+//  function bindClickTrash(i) {
+//     return function() {
+//     	// if (li.length === 1){
+//     	// 	li[0].remove();
+//     	// 	countList();
+//     	// 	return 0;
+//     	// }
+//     	console.log(i + "deleted")
+//         li[i].remove();
+//         countList();
+//     };
+//  }
 
+//Marking item as done on the list
+function doneTask(){
+	this.parentElement.parentElement.setAttribute("style", "text-decoration: line-through; background-color: rgba(210, 0, 100, 0.4);");
+}
 
+function deleteTask(){
+	this.parentElement.parentElement.remove();
+	countList();
+}
 
 
