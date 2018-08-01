@@ -182,12 +182,11 @@ i_descList.addEventListener("click", openTextArea2)
 
 //Marking item as done on the list
 function doneTask(){
-	this.parentElement.parentElement.setAttribute("style", "text-decoration: line-through; background-color: rgba(210, 0, 100, 0.4);");
+	this.parentElement.parentElement.classList.toggle("done");
 }
 
 function deleteTask(){
 	this.parentElement.parentElement.remove();
 	countList();
 }
-
 

@@ -121,7 +121,7 @@ textarea{
 }
 
 div ul{
-	height: 247px;
+	height: 400px;
 	overflow: hidden;
 	overflow-y: scroll;
 }
@@ -135,4 +135,9 @@ div ul{
 	border-radius: 0%;
 	width: 150px;
 	border-radius: 5%;
+}
+
+.done{
+	text-decoration: line-through; 
+	background-color: rgba(210, 0, 100, 0.4);
 }
